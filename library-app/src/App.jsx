@@ -8,6 +8,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { Link, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
@@ -18,6 +19,7 @@ const App = () => {
       <Box background={"green.700"} pt={"0,5"} pb={"0,5"}>
         <Flex display={"flex"}>
           
+        <Link to="/">
             <Box
               p="4"
               color="white"
@@ -30,6 +32,7 @@ const App = () => {
             >
               Home
             </Box>
+            </Link>
           <Box
             p="4"
             color="white"
@@ -101,6 +104,12 @@ const App = () => {
         </Flex>
       </Box>
         <Routes>
+      <Route
+        path="/"
+        element={
+            <Home />
+        }
+        />
       <Route
         path="/register"
         element={
