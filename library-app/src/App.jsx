@@ -15,6 +15,7 @@ import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
 import Book from "./pages/Book"
 import MyCart from "./pages/MyCart"
+import DetailPage from "./pages/DetailBook"
 
 
 const App = () => {
@@ -56,32 +57,32 @@ const App = () => {
                         About
                     </Box>
                     <Link to="/book">
-                    <Box
-                        p="4"
-                        color="white"
-                        _hover={{
-                            background: "white",
-                            color: "black",
-                            transition: "all 1000ms ease",
-                            cursor: "pointer",
-                        }}
-                    >
-                        Catalog Book
-                    </Box>
+                        <Box
+                            p="4"
+                            color="white"
+                            _hover={{
+                                background: "white",
+                                color: "black",
+                                transition: "all 1000ms ease",
+                                cursor: "pointer",
+                            }}
+                        >
+                            Catalog Book
+                        </Box>
                     </Link>
                     <Link to="/mycart">
-                    <Box
-                        p="4"
-                        color="white"
-                        _hover={{
-                            background: "white",
-                            color: "black",
-                            transition: "all 1000ms ease",
-                            cursor: "pointer",
-                        }}
-                    >
-                        Cart
-                    </Box>
+                        <Box
+                            p="4"
+                            color="white"
+                            _hover={{
+                                background: "white",
+                                color: "black",
+                                transition: "all 1000ms ease",
+                                cursor: "pointer",
+                            }}
+                        >
+                            Cart
+                        </Box>
                     </Link>
                     <Spacer />
                     <Box
@@ -133,6 +134,7 @@ const App = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/book" element={<Book />} />
                 <Route path="/mycart" element={<MyCart />} />
+                <Route path="/detail" element={<DetailPage />} />
             </Routes>
         </>
         //   {/* navbar */}

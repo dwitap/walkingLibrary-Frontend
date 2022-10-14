@@ -23,13 +23,13 @@ const LoginPage = () => {
 
     const formik = useFormik({
         initialValues: {
-            usernameOrEmail: "",
+            NIM: "",
             password: "",
         },
-        onSubmit: async ({ usernameOrEmail, password }) => {
+        onSubmit: async ({ NIM, password }) => {
             try {
                 const response = await axiosInstance.post("/user/login", {
-                    usernameOrEmail,
+                    NIM,
                     password,
                 })
 
@@ -56,7 +56,7 @@ const LoginPage = () => {
             }
         },
         validationSchema: Yup.object({
-            usernameOrEmail: Yup.string().required().min(3),
+            NIM: Yup.number().required().min(3),
             password: Yup.string().required(),
         }),
         validateOnChange: false,
@@ -84,17 +84,15 @@ const LoginPage = () => {
 
                     <form onSubmit={formik.handleSubmit}>
                         <Stack>
-                            <FormControl
-                                isInvalid={formik.errors.usernameOrEmail}
-                            >
-                                <FormLabel>Username or Email</FormLabel>
+                            <FormControl isInvalid={formik.errors.NIM}>
+                                <FormLabel>NIM</FormLabel>
                                 <Input
-                                    value={formik.values.usernameOrEmail}
-                                    name="usernameOrEmail"
+                                    value={formik.values.NIM}
+                                    name="NIM"
                                     onChange={formChangeHandler}
                                 />
                                 <FormErrorMessage>
-                                    {formik.errors.usernameOrEmail}
+                                    {formik.errors.NIM}
                                 </FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={formik.errors.password}>
