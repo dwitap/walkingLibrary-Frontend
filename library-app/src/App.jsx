@@ -13,6 +13,7 @@ import Home from "./pages/Home"
 import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
 import Book from "./pages/Book"
+import MyCart from "./pages/MyCart"
 
 
 
@@ -103,6 +104,7 @@ const App = () => {
                             <Input
                                 placeholder="search here"
                                 color={"white"}
+                                // _placeholder= {{color: 'black'}}
                             ></Input>
                             <InputRightElement width={"2,5 rem"}>
                                 <Button
@@ -120,6 +122,8 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/book" element={<Book />} />
+                <Route path="/mycart" element={<MyCart />} />
             </Routes>
         </>
         //   {/* navbar */}
