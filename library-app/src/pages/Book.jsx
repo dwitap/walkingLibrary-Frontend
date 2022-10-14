@@ -52,7 +52,7 @@ const Book = () => {
           key={val.id.toString()}
           title={val.title}
           author={val.author}
-          release_year={val.release_year}
+          release_year={val.release_year} 
           genre={val.genre}
           language={val.language}
         />
