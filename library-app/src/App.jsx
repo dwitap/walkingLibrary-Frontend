@@ -50,6 +50,7 @@ const App = () => {
                     >
                         About
                     </Box>
+                    <Link to="/book">
                     <Box
                         p="4"
                         color="white"
@@ -62,6 +63,8 @@ const App = () => {
                     >
                         Catalog Book
                     </Box>
+                    </Link>
+                    <Link to="/mycart">
                     <Box
                         p="4"
                         color="white"
@@ -72,8 +75,9 @@ const App = () => {
                             cursor: "pointer",
                         }}
                     >
-                        Help
+                        Cart
                     </Box>
+                    </Link>
                     <Spacer />
                     <Box
                         p="4"
