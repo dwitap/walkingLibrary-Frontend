@@ -1,5 +1,5 @@
 import {
-
+    Image,
   Box,
   Spacer,
   Flex,
@@ -22,6 +22,7 @@ const App = () => {
         <>
             <Box bgColor={"#9E7676"} pt={"0,5"} pb={"0,5"}>
                 <Flex display={"flex"}>
+                    <Image src="https://i.ibb.co/fXPc0Mx/Krusty-Krab-free-file-1.png" alt="Krusty Krab" border="0" height={"50px"} />                    
                     <Link to="/">
                         <Box
                             p="4"
