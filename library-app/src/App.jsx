@@ -1,12 +1,12 @@
 import {
     Image,
-  Box,
-  Spacer,
-  Flex,
-  InputRightElement,
-  InputGroup,
-  Button,
-  Input,
+    Box,
+    Spacer,
+    Flex,
+    InputRightElement,
+    InputGroup,
+    Button,
+    Input,
 } from "@chakra-ui/react"
 import { Link, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
@@ -15,13 +15,19 @@ import RegisterPage from "./pages/RegisterPage"
 import Book from "./pages/Book"
 import MyCart from "./pages/MyCart"
 
+
 const App = () => {
     return (
         // {Navbar}
         <>
             <Box bgColor={"#9E7676"} pt={"0,5"} pb={"0,5"}>
                 <Flex display={"flex"}>
-                    <Image src="https://i.ibb.co/fXPc0Mx/Krusty-Krab-free-file-1.png" alt="Krusty Krab" border="0" height={"50px"} />                    
+                    <Image
+                        src="https://i.ibb.co/fXPc0Mx/Krusty-Krab-free-file-1.png"
+                        alt="Krusty Krab"
+                        border="0"
+                        height={"50px"}
+                    />
                     <Link to="/">
                         <Box
                             p="4"

@@ -41,9 +41,6 @@ const Book = () => {
     } catch (err) {
       console.log(err)
     }
-  }
-
-
 
   const renderBooks = () => {
     return book.map((val) => {
