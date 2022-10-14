@@ -1,4 +1,5 @@
 import {
+
     Image,
     Box,
     Spacer,
@@ -138,4 +139,4 @@ const App = () => {
     )
 }
 
-export default App
+export default App;
