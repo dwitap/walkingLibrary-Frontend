@@ -1,16 +1,20 @@
 import {
-    Box,
-    Spacer,
-    Flex,
-    InputRightElement,
-    InputGroup,
-    Button,
-    Input,
+
+  Box,
+  Spacer,
+  Flex,
+  InputRightElement,
+  InputGroup,
+  Button,
+  Input,
 } from "@chakra-ui/react"
 import { Link, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
+import Book from "./pages/Book"
+
+
 
 const App = () => {
     return (
@@ -119,6 +123,7 @@ const App = () => {
         </>
         //   {/* navbar */}
     )
+
 }
 
 export default App
