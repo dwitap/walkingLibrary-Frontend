@@ -15,8 +15,6 @@ import RegisterPage from "./pages/RegisterPage"
 import Book from "./pages/Book"
 import MyCart from "./pages/MyCart"
 
-
-
 const App = () => {
     return (
         // {Navbar}
@@ -128,7 +126,6 @@ const App = () => {
         </>
         //   {/* navbar */}
     )
-
 }
 
 export default App
