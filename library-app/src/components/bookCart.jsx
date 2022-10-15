@@ -1,44 +1,40 @@
-// import { useSelector } from "react-redux";
-import { axiosInstance } from "../api";
-import { useState } from "react";
-import { useEffect } from "react";
+import {
+  Button,
+  Td,
+  Tr,
+} from "@chakra-ui/react";
 
-const BookCollection = ({ title, author, release_year, genre, language }) => {
-  // const authSelector = useSelector((state) => state.auth);
+const BookCollection = ({
+  title,
+  author,
+  release_year,
+  genre,
+  language,
+  onDelete,
+}) => {
 
-  // const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // const confirmDeleteBtnHandler = () => {
-  //   onClose()
-  //   onDelete()
-  // }
-
-  const [book, setBook] = useState([]);
-
-  const fetchBooks = async () => {
-    try {
-      const collection = await axiosInstance.get("/book");
-      setBook(collection.data);
-    } catch (err) {
-      console.log(err);
-    }
+  const confirmDeleteBtnHandler = () => {
+    onDelete();
   };
-
-  useEffect(() => {
-    fetchBooks();
-  }, []);
 
   return (
     <>
-      <tr>
-        <th></th>
-        <td>{title}</td>
-        <td>{author}</td>
-        <td>{release_year}</td>
-        <td>{genre}</td>
-        <td>{language}</td>
-        <th></th>
-      </tr>
+      <Tr>
+        <Td>{title}</Td>
+        <Td>{author}</Td>
+        <Td>{release_year}</Td>
+        <Td>{genre}</Td>
+        <Td>{language}</Td>
+        <Td>
+          <Button 
+          colorScheme="red" 
+          onClick={confirmDeleteBtnHandler} 
+          ml={3}>
+            Delete
+          </Button>
+        </Td>
+      </Tr>
     </>
   );
 };
