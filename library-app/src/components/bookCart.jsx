@@ -2,14 +2,16 @@ import {
   Button,
   Td,
   Tr,
+  Image,
 } from "@chakra-ui/react";
 
-const BookCollection = ({
+const BookCart = ({
   title,
   author,
   release_year,
   genre,
   language,
+  image_url,
   onDelete,
 }) => {
 
@@ -21,6 +23,7 @@ const BookCollection = ({
   return (
     <>
       <Tr>
+        <Td><Image src={image_url} alt="Image URL"/></Td>
         <Td>{title}</Td>
         <Td>{author}</Td>
         <Td>{release_year}</Td>
@@ -39,4 +42,4 @@ const BookCollection = ({
   );
 };
 
-export default BookCollection;
+export default BookCart;
