@@ -15,46 +15,59 @@ import { axiosInstance } from "../api"
 import BookCollection from "../components/bookCollection"
 
 const Book = () => {
-    const [book, setBook] = useState([])
-    const [page, setPage] = useState(0)
-    const [limit, setLimit] = useState(10)
-    const [pages, setPages] = useState(0)
-    const [rows, setRows] = useState(0)
-    const [keyword, setKeyword] = useState("")
-    const [keywordHandler, setKeywordHandler] = useState("")
 
-    const fetchBooks = async () => {
-        try {
-            const collection = await axiosInstance.get("/book", {
-                params: {
-                    _order: "DESC",
-                    _query: keyword,
-                    _page: page,
-                    _limit: limit,
-                },
-            })
-            setBook(collection.data.data)
-            setPages(collection.data.totalPage)
-            setRows(collection.data.totalRows)
-        } catch (err) {
-            console.log(err)
-        }
-    }
+  const [book, setBook] = useState([])
+  const [page, setPage] = useState(0)
+  const [limit, setLimit] = useState(10)
+  const [pages, setPages] = useState(0)
+  const [rows, setRows] = useState(0)
+  const [keyword, setKeyword] = useState("")
+  const [keywordHandler, setKeywordHandler] = useState("")
 
-    const renderBooks = () => {
-        return book.map((val) => {
-            return (
-                <BookCollection
-                    key={val.id.toString()}
-                    title={val.title}
-                    author={val.author}
-                    release_year={val.release_year}
-                    genre={val.genre}
-                    language={val.language}
-                />
-            )
-        })
+  const fetchBooks = async () => {
+    try {
+      const collection = await axiosInstance.get("/book", {
+        params: {
+          _order: "DESC",
+          _keywordHandler: keyword,
+          _page: page,
+          _limit: limit,
+        },
+      })
+      setBook(collection.data.data)
+      // setPage(collection.data.page)
+      setPages(collection.data.totalPage)
+      setRows(collection.data.totalRows)
+    } catch (err) {
+      console.log(err)
     }
+  }
+
+  const renderBooks = () => {
+    return book.map((val) => {
+      return (
+        <BookCollection
+          key={val.id.toString()}
+          title={val.title}
+          author={val.author}
+          release_year={val.release_year}
+          genre={val.genre}
+          language={val.language}
+        />
+      )
+    })
+  }
+
+  const searchKey = (event) => {
+    event.preventDevault()
+    setPage(0)
+    setKeyword(keywordHandler)
+  }
+
+  const changePage = ({ selected }) => {
+    setPage(selected)
+  }
+
 
     const searchKey = (event) => {
         event.preventDevault()
@@ -66,6 +79,7 @@ const Book = () => {
         setPage(selected)
         console.log(selected)
     }
+
 
     useEffect(() => {
         console.log(page)
