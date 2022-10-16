@@ -14,7 +14,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../api";
 import BookCart from "../components/bookCart";
-import { Navigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const MyCart = () => {
@@ -65,14 +65,10 @@ const MyCart = () => {
 
   const confirmBorrowHandler = async (id) => {
     try {
-      await axiosInstance.patch("/cart");
-      // <Redirect to = {{ pathname:"/cart/borrowed" }} />
-      
+      await axiosInstance.patch("/cart");      
       fetchBooks();
       toast({ title: "Successfully borrowed the books", 
       status: "info" });
-      <Navigate to = "http://localhost:3000/borrowed/" replace={true} />
-      // <Navigate to = "http://localhost:3000/borrowed/" replace={true} />
     } catch (err) {
       console.log(err);
     }
