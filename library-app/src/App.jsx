@@ -7,6 +7,8 @@ import {
     InputGroup,
     Button,
     Input,
+    Text,
+    Center,
 } from "@chakra-ui/react"
 import { Link, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
@@ -15,9 +17,47 @@ import RegisterPage from "./pages/RegisterPage"
 import Book from "./pages/Book"
 import MyCart from "./pages/MyCart"
 import DetailPage from "./pages/DetailBook"
-import BorrowedBook from "./pages/BorrowedBook" 
+import BorrowedBook from "./pages/BorrowedBook"
+import { login, logout } from "./redux/features/authSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
+import { useEffect } from "react"
+import { axiosInstance } from "./api"
 
 const App = () => {
+    const [authCheck, setAuthCheck] = useState(false)
+    const authSelector = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
+
+    const keepUserLoggedIn = async () => {
+        try {
+            const auth_token = localStorage.getItem("auth_token")
+
+            if (!auth_token) {
+                setAuthCheck(true)
+                return
+            }
+
+            const response = await axiosInstance.get("/auth/refresh-token")
+
+            dispatch(login(response.data.data))
+            localStorage.setItem("auth_token", response.data.token)
+            setAuthCheck(true)
+        } catch (err) {
+            console.log(err)
+            setAuthCheck(true)
+        }
+    }
+
+    const logoutBtnHandler = () => {
+        localStorage.removeItem("auth_token")
+        dispatch(logout())
+    }
+
+    useEffect(() => {
+        keepUserLoggedIn()
+    }, [])
+
     return (
         // {Navbar}
         <>
@@ -84,47 +124,54 @@ const App = () => {
                         </Box>
                     </Link>
                     <Spacer />
-                    <Box
-                        p="4"
-                        color="white"
-                        _hover={{
-                            background: "white",
-                            color: "black",
-                            transition: "all 1000ms ease",
-                            cursor: "pointer",
-                        }}
-                    >
-                        <Link to="/login">Login</Link>
-                    </Box>
-                    <Box
-                        p="4"
-                        color="white"
-                        _hover={{
-                            background: "white",
-                            color: "black",
-                            transition: "all 1000ms ease",
-                            cursor: "pointer",
-                        }}
-                    >
-                        <Link to="/register">Register</Link>
-                    </Box>
-                    <Box mr="2" mt="2" mb="2">
-                        <InputGroup>
-                            <Input
-                                placeholder="search here"
-                                color={"white"}
-                                // _placeholder= {{color: 'black'}}
-                            ></Input>
-                            <InputRightElement width={"2,5 rem"}>
-                                <Button
-                                    _hover={{ background: "white" }}
-                                    color={"white.300"}
-                                >
-                                    Search
-                                </Button>
-                            </InputRightElement>
-                        </InputGroup>
-                    </Box>
+                    {authSelector.id ? (
+                        <Text
+                            mt={"4"}
+                            mb={"5"}
+                            mr={"5"}
+                            fontWeight="bold"
+                            color={"white"}
+                        >
+                            Hello, {authSelector.username}!
+                        </Text>
+                    ) : null}
+                    {!authSelector.id ? (
+                        <Box
+                            p="4"
+                            color="white"
+                            _hover={{
+                                background: "white",
+                                color: "black",
+                                transition: "all 1000ms ease",
+                                cursor: "pointer",
+                            }}
+                        >
+                            <Link to="/login">Login</Link>
+                        </Box>
+                    ) : (
+                        <Button
+                            onClick={logoutBtnHandler}
+                            color={"#9E7676"}
+                            mt={2}
+                        >
+                            Logout
+                        </Button>
+                    )}
+                    {!authSelector.id ? (
+                        <Box
+                            p="4"
+                            color="white"
+                            _hover={{
+                                background: "white",
+                                color: "black",
+                                transition: "all 1000ms ease",
+                                cursor: "pointer",
+                            }}
+                        >
+                            <Link to="/register">Register</Link>
+                        </Box>
+                    ) : null}
+                    <Box mr="2" mt="2" mb="2"></Box>
                 </Flex>
             </Box>
             <Routes>

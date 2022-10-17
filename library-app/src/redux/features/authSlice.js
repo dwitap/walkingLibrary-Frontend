@@ -5,8 +5,6 @@ const initialState = {
     NIM: 0,
     username: "",
     email: "",
-    role: "",
-    profile_picture: "",
 }
 
 const authSlice = createSlice({
@@ -23,7 +21,7 @@ const authSlice = createSlice({
             state.id = 0
             state.username = ""
             state.email = ""
-            // return initialState
+            state.NIM = ""
         },
     },
 })
