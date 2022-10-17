@@ -104,7 +104,7 @@ const MyCart = () => {
               <Th>Title</Th>
               <Th>Author</Th>
               <Th>Release year</Th>
-              <Th></Th>
+              <Th>Action</Th>
             </Tr>
             {renderBooks()}
           </Table>
