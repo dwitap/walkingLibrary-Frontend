@@ -9,8 +9,8 @@ import {
   FormControl,
   Input,
   Square,
-  Link,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom"
 
 const Home = () => {
   return (
@@ -32,14 +32,13 @@ const Home = () => {
           Selamat datang di perpustakaan resep makanan Krusty Krab <br />
           Lebih dari 9 miliar resep masakan dapat ditemukan disini! <br />
           <br />
-          {/* <Link replace to="/register"> */}
+          <Link to="/register">
           <Button
             colorScheme={"orange"}
-            onclick="location.href = 'http://localhost:3000/register';"
           >
             Register
           </Button>
-          {/* </Link> */}
+          </Link>
         </Box>
         <HStack paddingTop={"10%"} spacing={100} backgroundColor={"white"}>
           <Box
@@ -77,8 +76,8 @@ const Home = () => {
           paddingX={"50px"}
           fontSize="20px"
         >
-          <Link to="/detail/">
-            <Box w="30%">
+          <Link to="/detail/11">
+            <Box>
               <Image
                 src="https://cdn.istyle.im/images/product/web/89/11/92/00/0/000000921189_01_800.jpg"
                 alt="The Hunger Games"
@@ -92,7 +91,8 @@ const Home = () => {
               </Text>
             </Box>
           </Link>
-          <Box w="30%">
+          <Link to="/detail/40">
+          <Box>
             <Image
               src="https://cdn.gramedia.com/uploads/items/bumi-manusia-edit.jpg"
               alt="Bumi Manusia"
@@ -105,7 +105,9 @@ const Home = () => {
               manusia. Dan aku tak akan kalah darinya.
             </Text>
           </Box>
-          <Box w="30%">
+          </Link>
+          <Link to="/detail/34">
+          <Box>
             <Image
               src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1597998203l/52465880.jpg"
               alt="How To Respect Myself"
@@ -117,6 +119,7 @@ const Home = () => {
               mengkhawatirkannya, kau justru menggandakan masalah tersebut.{" "}
             </Text>
           </Box>
+          </Link>
         </Flex>
         {/* </HStack> */}
       </VStack>

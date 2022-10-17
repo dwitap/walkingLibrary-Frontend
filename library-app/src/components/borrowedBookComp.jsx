@@ -16,7 +16,7 @@ import {
     return (
       <>
         <Tr>
-        <Td><Image src={image_url} alt="Image URL"/></Td>
+        <Td><Image src={image_url || "Nothing to show. You have not borrowed anything"} alt="Image URL"/></Td>
           <Td>{title}</Td>
           <Td>{author}</Td>
           <Td>{release_year}</Td>
