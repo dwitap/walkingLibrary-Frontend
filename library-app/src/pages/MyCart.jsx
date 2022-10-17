@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../api";
 import BookCart from "../components/bookCart";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [book, setBook] = useState([]);
@@ -48,6 +49,7 @@ const MyCart = () => {
         <BookCart
           key={val.id.toString()}
           id={val.Book.id}
+          image_url={val.Book.image_url}
           title={val.Book.title}
           author={val.Book.author}
           release_year={val.Book.release_year}
@@ -57,6 +59,17 @@ const MyCart = () => {
         />
       );
     });
+  };
+
+  const confirmBorrowHandler = async (id) => {
+    try {
+      await axiosInstance.patch("/cart");      
+      fetchBooks();
+      toast({ title: "Successfully borrowed the books", 
+      status: "info" });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -87,24 +100,26 @@ const MyCart = () => {
             textAlign={"center"}
           >
             <Tr>
+            <Th>Image</Th>
               <Th>Title</Th>
               <Th>Author</Th>
               <Th>Release year</Th>
-              <Th>Genre</Th>
-              <Th>Language</Th>
               <Th></Th>
             </Tr>
             {renderBooks()}
           </Table>
         </HStack>
+        <Link to="/borrowed">
         <Button
           colorScheme={"green"}
           alignItems="center"
           justifyContent="center"
           width={"100%"}
+          onClick={confirmBorrowHandler}
         >
-          Belom ada isi
+          Borrow books
         </Button>
+        </Link>
       </Container>
     </Box>
   );

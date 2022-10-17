@@ -15,6 +15,7 @@ import RegisterPage from "./pages/RegisterPage"
 import Book from "./pages/Book"
 import MyCart from "./pages/MyCart"
 import DetailPage from "./pages/DetailBook"
+import BorrowedBook from "./pages/BorrowedBook" 
 
 const App = () => {
     return (
