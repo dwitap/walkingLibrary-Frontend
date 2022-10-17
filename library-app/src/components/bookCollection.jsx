@@ -1,35 +1,10 @@
-import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
-  Avatar,
-  Box,
-  Button,
-  HStack,
-  Icon,
-  Image,
-  Input,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Stack,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react"
-
-import { useFormik } from "formik"
-import { BsThreeDots } from "react-icons/bs"
+import { Tr, Td, useDisclosure, Image, Button } from "@chakra-ui/react"
 import { useSelector } from "react-redux"
-import * as Yup from "yup"
 import { axiosInstance } from "../api"
 import { useState } from "react"
 import { useEffect } from "react"
+import DetailPage from "../pages/DetailBook"
 import { Link } from "react-router-dom"
-
 
 const BookCollection = ({
     id,
@@ -60,7 +35,6 @@ const BookCollection = ({
         }
     }
 
-
     useEffect(() => {
         fetchBooks()
     }, [])
@@ -69,10 +43,12 @@ const BookCollection = ({
         <>
             <Tr>
                 <Td>
-                    <Image maxH={"120px"} src={image_url || ""} />
+                    <Link to={`/detail/${id}`}>
+                        <Image maxH={"120px"} src={image_url || ""} />
+                    </Link>
                 </Td>
                 <Td>
-                    <Link to={`/detail`}>{title}</Link>
+                    <Link to={`/detail/${id}`}>{title}</Link>
                 </Td>
                 <Td>{author}</Td>
                 <Td>{release_year}</Td>

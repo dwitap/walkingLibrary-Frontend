@@ -11,108 +11,171 @@ import {
     Table,
     Thead,
     Heading,
-
-
+    Grid,
+    GridItem,
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    HStack,
 } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
-import ReactPaginate from "react-paginate"
 import { axiosInstance } from "../api"
 import BookCollection from "../components/bookCollection"
+import { CgChevronLeft, CgChevronRight } from "react-icons/cg"
+import bookSlice from "../redux/features/bookSlice"
 
 const Book = () => {
-
-
     const [book, setBook] = useState([])
-    const [page, setPage] = useState(0)
-    const [limit, setLimit] = useState(10)
-    const [pages, setPages] = useState(0)
+    const [page, setPage] = useState(1)
+    // const [limit, setLimit] = useState(10)
+    const [pages, setPages] = useState()
     const [rows, setRows] = useState(0)
     const [keyword, setKeyword] = useState("")
     const [keywordHandler, setKeywordHandler] = useState("")
+    const [sortDir, setSortDir] = useState("ASC")
+    const maxItemsPage = 10
+    const [maxPage, setMaxPage] = useState(0)
 
-    
-  const fetchBooks = async () => {
-    try {
-      const collection = await axiosInstance.get("/book", {
-        params: {
-          _order: "DESC",
-          _keywordHandler: keyword,
-          _page: page,
-          _limit: limit,
-        },
-      })
-      setBook(collection.data.data)
-      // setPage(collection.data.page)
-      setPages(collection.data.totalPage)
-      setRows(collection.data.totalRows)
-    } catch (err) {
-      console.log(err)
+    const fetchBooks = async () => {
+        try {
+            const collection = await axiosInstance.get("/book", {
+                params: {
+                    _keywordHandler: keyword,
+                    _page: pages,
+                    _limit: maxItemsPage,
+                    _sortDir: sortDir,
+                },
+            })
+            // setBook(collection.data.data)
+            setRows(collection.data.totalRows)
+            setMaxPage(Math.ceil(collection.data.totalRows) / maxItemsPage)
+
+            if (pages === 1) {
+                setBook(collection.data.data)
+            } else {
+                setBook(collection.data.data)
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
-  }
 
-  const renderBooks = () => {
-    return book.map((val) => {
-      return (
-        <BookCollection
-          key={val.id.toString()}
-          title={val.title}
-          author={val.author}
-          release_year={val.release_year}
-          genre={val.genre}
-          language={val.language}
-        />
-      )
-    })
-  }
+    const nextPage = () => {
+        setPages(pages + 1)
+    }
 
-  const searchKey = (event) => {
-    event.preventDevault()
-    setPage(0)
-    setKeyword(keywordHandler)
-  }
+    const prevPage = () => {
+        setPages(pages - 1)
+    }
 
-  const changePage = ({ selected }) => {
-    setPage(selected)
-  }
+    const renderBooks = () => {
+        return book.map((val) => {
+            return (
+                <BookCollection
+                    key={val.id.toString()}
+                    id={val.id}
+                    image_url={val.image_url}
+                    title={val.title}
+                    author={val.author}
+                    release_year={val.release_year}
+                    genre={val.genre}
+                    language={val.language}
+                />
+            )
+        })
+    }
+    console.log(renderBooks())
 
-  useEffect(() => {
-    console.log(page)
-    fetchBooks()
-  }, [page, keyword])
+    const searchKey = (event) => {
+        event.preventDevault()
+        setPage(0)
+        setKeyword(keywordHandler)
+    }
 
-  return (
-    <>
-      <FormControl>
-        <Input
-          name="input"
-          value={keywordHandler}
-          onChange={(event) => setKeywordHandler(event.target.value)}
-        />
-        <Button onSubmit={searchKey}>Search</Button>
-      </FormControl>
+    useEffect(() => {
+        console.log(page)
+        fetchBooks()
+    }, [pages, keyword, sortDir])
 
-      <Box fontWeight={"bold"}>Books</Box>
-      <HStack>
-        <Box>title</Box>
-        <Box>author</Box>
-        <Box>release year</Box>
-        <Box>genre</Box>
-        <Box>language</Box>
-      </HStack>
-      {renderBooks()}
-      <Text>
-        Total Rows: {rows} Page: {rows ? page + 1 : 0} of {pages}
-      </Text>
-      <Box>
-        <ReactPaginate
-          previousLabel={"< Prev"}
-          nextLabel={"Next >"}
-          pageCount={pages}
-          onPageChange={changePage}
-        />
-      </Box>
-    </>
-  )
+    return (
+        <div
+            style={{
+                marginLeft: "24px",
+                marginRight: "24px",
+                marginTop: "10px",
+            }}
+        >
+            <FormControl>
+                <Input
+                    name="input"
+                    value={keywordHandler}
+                    onChange={(event) => setKeywordHandler(event.target.value)}
+                />
+                <div
+                    style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "flex-end",
+                    }}
+                >
+                    <Button onSubmit={searchKey} mr={0}>
+                        Search
+                    </Button>
+                </div>
+            </FormControl>
+
+            <Heading fontWeight={"bold"} size={"lg"}>
+                Books
+            </Heading>
+            <TableContainer>
+                <Table variant="simple">
+                    <Thead>
+                        <Tr>
+                            <Th>Image</Th>
+                            <Th>Title</Th>
+                            <Th>Author</Th>
+                            <Th>Release Year</Th>
+                            <Th>Genre</Th>
+                            <Th>Language</Th>
+                            <Th>Cart</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>{renderBooks()}</Tbody>
+                </Table>
+            </TableContainer>
+            <Text>
+                Page: {pages} of {maxPage}
+            </Text>
+            <Grid templateColumns={"repeat(3, 1fr"} mt={15}>
+                <GridItem />
+                <GridItem />
+                <GridItem>
+                    {!book.length ? (
+                        <Alert status="warning">
+                            <AlertIcon />
+                            <AlertTitle>No post found</AlertTitle>
+                        </Alert>
+                    ) : null}
+                    <HStack justifyContent={"end"} gap={"2px"}>
+                        {pages === 0 ? null : (
+                            <CgChevronLeft onClick={prevPage} color={"#9E7676"}>
+                                {""}
+                            </CgChevronLeft>
+                        )}
+                        <Text fontSize={"md"}>{pages}</Text>
+                        {pages >= maxPage ? null : (
+                            <CgChevronRight
+                                onClick={nextPage}
+                                color={"#9E7676"}
+                            >
+                                Next
+                            </CgChevronRight>
+                        )}
+                    </HStack>
+                </GridItem>
+            </Grid>
+        </div>
+    )
 }
 
 export default Book
