@@ -1,5 +1,4 @@
 import {
-
     Box,
     Button,
     Input,
@@ -13,13 +12,15 @@ import {
     Thead,
     Heading,
 
+
 } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
+import ReactPaginate from "react-paginate"
 import { axiosInstance } from "../api"
 import BookCollection from "../components/bookCollection"
-import ReactPaginate from "react-paginate"
 
 const Book = () => {
+
 
     const [book, setBook] = useState([])
     const [page, setPage] = useState(0)
@@ -49,98 +50,89 @@ const Book = () => {
 
     }
 
-    const renderBooks = () => {
-        return book.map((val) => {
-            return (
-                <BookCollection
-                    key={val.id.toString()}
-                    id={val.id}
-                    image_url={val.image_url}
-                    title={val.title}
-                    author={val.author}
-                    release_year={val.release_year}
-                    genre={val.genre}
-                    language={val.language}
-                />
-            )
-        })
+
+  const fetchBooks = async () => {
+    try {
+      const collection = await axiosInstance.get("/book", {
+        params: {
+          _order: "DESC",
+          _keywordHandler: keyword,
+          _page: page,
+          _limit: limit,
+        },
+      })
+      setBook(collection.data.data)
+      // setPage(collection.data.page)
+      setPages(collection.data.totalPage)
+      setRows(collection.data.totalRows)
+    } catch (err) {
+      console.log(err)
     }
-    console.log(renderBooks())
+  }
 
-    const searchKey = (event) => {
-        event.preventDevault()
-        setPage(0)
-        setKeyword(keywordHandler)
-    }
+  const renderBooks = () => {
+    return book.map((val) => {
+      return (
+        <BookCollection
+          key={val.id.toString()}
+          title={val.title}
+          author={val.author}
+          release_year={val.release_year}
+          genre={val.genre}
+          language={val.language}
+        />
+      )
+    })
+  }
 
-    const changePage = ({ selected }) => {
-        setPage(selected)
-    }
+  const searchKey = (event) => {
+    event.preventDevault()
+    setPage(0)
+    setKeyword(keywordHandler)
+  }
 
-    // const pagination = () => {}
+  const changePage = ({ selected }) => {
+    setPage(selected)
+  }
 
-    useEffect(() => {
-        console.log(page)
-        fetchBooks()
-    }, [page, keyword])
+  useEffect(() => {
+    console.log(page)
+    fetchBooks()
+  }, [page, keyword])
 
-    return (
-        <div
-            style={{
-                marginLeft: "24px",
-                marginRight: "24px",
-                marginTop: "10px",
-            }}
-        >
-            <FormControl>
-                <Input
-                    name="input"
-                    value={keywordHandler}
-                    onChange={(event) => setKeywordHandler(event.target.value)}
-                />
-                <div
-                    style={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "flex-end",
-                    }}
-                >
-                    <Button onSubmit={searchKey} mr={0}>
-                        Search
-                    </Button>
-                </div>
-            </FormControl>
+  return (
+    <>
+      <FormControl>
+        <Input
+          name="input"
+          value={keywordHandler}
+          onChange={(event) => setKeywordHandler(event.target.value)}
+        />
+        <Button onSubmit={searchKey}>Search</Button>
+      </FormControl>
 
-            <Heading fontWeight={"bold"} size={"lg"}>
-                Books
-            </Heading>
-            <TableContainer>
-                <Table variant="simple">
-                    <Thead>
-                        <Tr>
-                            <Th>Image</Th>
-                            <Th>Title</Th>
-                            <Th>Author</Th>
-                            <Th>Release Year</Th>
-                            <Th>Genre</Th>
-                            <Th>Language</Th>
-                            <Th>Cart</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>{renderBooks()}</Tbody>
-                </Table>
-            </TableContainer>
-            <Text>
-                Total Rows: {rows} Page: {rows ? page + 1 : 0} of {pages}
-            </Text>
-            <ReactPaginate
-                previousLabel={"< Prev"}
-                nextLabel={"Next >"}
-                pageCount={pages}
-                onPageChange={changePage}
-            />
-        </div>
-    )
+      <Box fontWeight={"bold"}>Books</Box>
+      <HStack>
+        <Box>title</Box>
+        <Box>author</Box>
+        <Box>release year</Box>
+        <Box>genre</Box>
+        <Box>language</Box>
+      </HStack>
+      {renderBooks()}
+      <Text>
+        Total Rows: {rows} Page: {rows ? page + 1 : 0} of {pages}
+      </Text>
+      <Box>
+        <ReactPaginate
+          previousLabel={"< Prev"}
+          nextLabel={"Next >"}
+          pageCount={pages}
+          onPageChange={changePage}
+        />
+      </Box>
+    </>
+  )
 }
 
 export default Book

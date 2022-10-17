@@ -13,6 +13,7 @@ import {
 
 const Home = () => {
   return (
+
     <Box width={"100%"} overflow={"hidden"}>
       <VStack rowGap={"10%"}>
         <Image
@@ -193,6 +194,7 @@ const Home = () => {
                   Perpustakaan Resep Bikini Bottom
                 </Text>
               </Square>
+
               <Square
                 justifyContent={"center"}
                 marginLeft="40px"

@@ -1,4 +1,5 @@
 import {
+
     Image,
     Box,
     Spacer,
@@ -15,7 +16,7 @@ import RegisterPage from "./pages/RegisterPage"
 import Book from "./pages/Book"
 import MyCart from "./pages/MyCart"
 import DetailPage from "./pages/DetailBook"
-import BorrowedBook from "./pages/BorrowedBook"
+
 
 const App = () => {
     return (
@@ -134,11 +135,10 @@ const App = () => {
                 <Route path="/book" element={<Book />} />
                 <Route path="/mycart" element={<MyCart />} />
                 <Route path="/detail" element={<DetailPage />} />
-                <Route path="/borrowed" element={<BorrowedBook />} />
             </Routes>
         </>
         //   {/* navbar */}
     )
 }
 
-export default App
+export default App;

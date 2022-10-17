@@ -1,10 +1,35 @@
-import { Tr, Td, useDisclosure, Image, Button } from "@chakra-ui/react"
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  Avatar,
+  Box,
+  Button,
+  HStack,
+  Icon,
+  Image,
+  Input,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Stack,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react"
+
+import { useFormik } from "formik"
+import { BsThreeDots } from "react-icons/bs"
 import { useSelector } from "react-redux"
+import * as Yup from "yup"
 import { axiosInstance } from "../api"
 import { useState } from "react"
 import { useEffect } from "react"
-import DetailPage from "../pages/DetailBook"
 import { Link } from "react-router-dom"
+
 
 const BookCollection = ({
     id,

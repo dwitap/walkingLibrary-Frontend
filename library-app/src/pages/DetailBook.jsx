@@ -1,13 +1,5 @@
-import {
-    Box,
-    Image,
-    Flex,
-    Heading,
-    Text,
-    Button,
-    Grid,
-    GridItem,
-} from "@chakra-ui/react"
+
+import { Box, Image, Flex, Heading, Text } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
 import { detailsBook } from "../redux/features/bookSlice"
 import { useParams } from "react-router-dom"
@@ -20,17 +12,18 @@ const DetailPage = () => {
 
     const fetchBook = async () => {
         try {
-            const response = await axiosInstance.get("/book", {
+            const book = await axiosInstance.get("/book", {
                 params: {
                     id: params.id,
                 },
             })
 
-            // const bookId = book.data.data.filter((val) => {
-            //     return val.id == params.id
-            // })
+            const bookId = book.data.data.filter((val) => {
+                return val.id == params.id
+            })
 
-            // const response = await axiosInstance.get(`/book/`)
+            const response = await axiosInstance.get(`/book/${dataBook[0].id}`)
+
 
             setDataBook(response.data.data)
         } catch (err) {
@@ -43,20 +36,8 @@ const DetailPage = () => {
     }, [])
 
     return (
-        <Box p={"40px"} pt={"5px"} bgColor={"#FFF8EA"}>
-            <Grid templateColumns="repeat(2, 1fr)">
-                <GridItem w="100%">
-                    <Heading p={5}>BOOK DETAILS</Heading>
-                </GridItem>
-                <GridItem
-                    w="100%"
-                    display={"flex"}
-                    justifyContent={"flex-end"}
-                    pt={"5"}
-                >
-                    <Button>Add to Cart</Button>
-                </GridItem>
-            </Grid>
+        <Box p={"40px"} bgColor={"#FFF8EA"}>
+            <Heading p={5}>BOOK DETAILS</Heading>
             <Flex
                 bgColor={"#9E7676"}
                 direction={{ base: "column", md: "column", lg: "row" }}
@@ -107,3 +88,4 @@ const DetailPage = () => {
 }
 
 export default DetailPage
+
