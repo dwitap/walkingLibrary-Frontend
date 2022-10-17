@@ -133,7 +133,7 @@ const App = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/book" element={<Book />} />
                 <Route path="/mycart" element={<MyCart />} />
-                <Route path="/detail" element={<DetailPage />} />
+                <Route path="/detail/:bookId" element={<DetailPage />} />
                 <Route path="/borrowed" element={<BorrowedBook />} />
             </Routes>
         </>

@@ -15,22 +15,13 @@ import { axiosInstance } from "../api"
 
 const DetailPage = () => {
     const [dataBook, setDataBook] = useState({})
+    const [test, setTest] = useState({})
 
     const params = useParams()
 
     const fetchBook = async () => {
         try {
-            const response = await axiosInstance.get("/book", {
-                params: {
-                    id: params.id,
-                },
-            })
-
-            // const bookId = book.data.data.filter((val) => {
-            //     return val.id == params.id
-            // })
-
-            // const response = await axiosInstance.get(`/book/`)
+            const response = await axiosInstance.get(`/book/${params.bookId}`)
 
             setDataBook(response.data.data)
         } catch (err) {

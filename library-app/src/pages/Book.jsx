@@ -11,38 +11,61 @@ import {
     Table,
     Thead,
     Heading,
+    Grid,
+    GridItem,
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    HStack,
 } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { axiosInstance } from "../api"
 import BookCollection from "../components/bookCollection"
-import ReactPaginate from "react-paginate"
+import { CgChevronLeft, CgChevronRight } from "react-icons/cg"
+import bookSlice from "../redux/features/bookSlice"
 
 const Book = () => {
     const [book, setBook] = useState([])
-    const [page, setPage] = useState(0)
-    const [limit, setLimit] = useState(10)
-    const [pages, setPages] = useState(0)
+    const [page, setPage] = useState(1)
+    // const [limit, setLimit] = useState(10)
+    const [pages, setPages] = useState()
     const [rows, setRows] = useState(0)
     const [keyword, setKeyword] = useState("")
     const [keywordHandler, setKeywordHandler] = useState("")
+    const [sortDir, setSortDir] = useState("ASC")
+    const maxItemsPage = 10
+    const [maxPage, setMaxPage] = useState(0)
 
     const fetchBooks = async () => {
         try {
             const collection = await axiosInstance.get("/book", {
                 params: {
-                    _order: "DESC",
                     _keywordHandler: keyword,
-                    _page: page,
-                    _limit: limit,
+                    _page: pages,
+                    _limit: maxItemsPage,
+                    _sortDir: sortDir,
                 },
             })
-            setBook(collection.data.data)
-            // setPage(collection.data.page)
-            setPages(collection.data.totalPage)
+            // setBook(collection.data.data)
             setRows(collection.data.totalRows)
+            setMaxPage(Math.ceil(collection.data.totalRows) / maxItemsPage)
+
+            if (pages === 1) {
+                setBook(collection.data.data)
+            } else {
+                setBook(collection.data.data)
+            }
         } catch (err) {
             console.log(err)
         }
+    }
+
+    const nextPage = () => {
+        setPages(pages + 1)
+    }
+
+    const prevPage = () => {
+        setPages(pages - 1)
     }
 
     const renderBooks = () => {
@@ -69,16 +92,10 @@ const Book = () => {
         setKeyword(keywordHandler)
     }
 
-    const changePage = ({ selected }) => {
-        setPage(selected)
-    }
-
-    // const pagination = () => {}
-
     useEffect(() => {
         console.log(page)
         fetchBooks()
-    }, [page, keyword])
+    }, [pages, keyword, sortDir])
 
     return (
         <div
@@ -127,14 +144,36 @@ const Book = () => {
                 </Table>
             </TableContainer>
             <Text>
-                Total Rows: {rows} Page: {rows ? page + 1 : 0} of {pages}
+                Page: {pages} of {maxPage}
             </Text>
-            <ReactPaginate
-                previousLabel={"< Prev"}
-                nextLabel={"Next >"}
-                pageCount={pages}
-                onPageChange={changePage}
-            />
+            <Grid templateColumns={"repeat(3, 1fr"} mt={15}>
+                <GridItem />
+                <GridItem />
+                <GridItem>
+                    {!book.length ? (
+                        <Alert status="warning">
+                            <AlertIcon />
+                            <AlertTitle>No post found</AlertTitle>
+                        </Alert>
+                    ) : null}
+                    <HStack justifyContent={"end"} gap={"2px"}>
+                        {pages === 0 ? null : (
+                            <CgChevronLeft onClick={prevPage} color={"#9E7676"}>
+                                {""}
+                            </CgChevronLeft>
+                        )}
+                        <Text fontSize={"md"}>{pages}</Text>
+                        {pages >= maxPage ? null : (
+                            <CgChevronRight
+                                onClick={nextPage}
+                                color={"#9E7676"}
+                            >
+                                Next
+                            </CgChevronRight>
+                        )}
+                    </HStack>
+                </GridItem>
+            </Grid>
         </div>
     )
 }
