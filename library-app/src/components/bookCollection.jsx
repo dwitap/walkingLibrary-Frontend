@@ -47,6 +47,7 @@ const BookCollection = ({
 
   const pushToCart = async () => {
     try {
+      // if()
       let bookToAdd = {
         BookId: id,
       }
@@ -55,6 +56,7 @@ const BookCollection = ({
       toast({ title: "Book Added", status: "success" })
     } catch (err) {
       console.log(err)
+      toast({ title: "Please login first", status: "error" })
     }
   } 
 

@@ -33,6 +33,8 @@ const LoginPage = () => {
                     password,
                 })
 
+                localStorage.setItem("auth_token", response.data.token)
+                console.log(response)
                 dispatch(
                     login({
                         username: response.data.data.username,

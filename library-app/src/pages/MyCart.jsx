@@ -24,7 +24,7 @@ const MyCart = () => {
     try {
       const collection = await axiosInstance.get("/cart");
       setBook(collection.data.data);
-      console.log(collection.data.data);
+      // console.log(collection.data.data);
       // setBook(collection.data.data[i].Book);
       // console.log(collection.data.data[i].Book)
     } catch (err) {
@@ -104,6 +104,8 @@ const MyCart = () => {
               <Th>Title</Th>
               <Th>Author</Th>
               <Th>Release year</Th>
+              <Th>Genre</Th>
+              <Th>Language</Th>
               <Th>Action</Th>
             </Tr>
             {renderBooks()}

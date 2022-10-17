@@ -24,7 +24,7 @@ import { Link } from "react-router-dom";
       try {
         const collection = await axiosInstance.get("/cart/borrowed");
         setBook(collection.data.data);
-        console.log(collection.data.data);
+        // console.log(collection.data.data);
         // setBook(collection.data.data[i].Book);
         // console.log(collection.data.data[i].Book)
       } catch (err) {
