@@ -81,7 +81,7 @@ const Book = () => {
     }
 
     const searchKey = (event) => {
-        event.preventDevault()
+        // event.preventDevault()
         setPage(0)
         setKeyword(keywordHandler)
     }
@@ -104,17 +104,11 @@ const Book = () => {
                     value={keywordHandler}
                     onChange={(event) => setKeywordHandler(event.target.value)}
                 />
-                <div
-                    style={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "flex-end",
-                    }}
-                >
-                    <Button onSubmit={searchKey} mr={0}>
+               
+                    <Button onClick={searchKey} mr={0}>
                         Search
                     </Button>
-                </div>
+                
             </FormControl>
 
             <Heading fontWeight={"bold"} size={"lg"}>
