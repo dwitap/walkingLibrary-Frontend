@@ -1,15 +1,17 @@
 import {
-    Box,
-    Button,
-    HStack,
-    VStack,
-    Image,
-    Flex,
-    Text,
-    FormControl,
-    Input,
-    Square,
-} from "@chakra-ui/react"
+  Box,
+  Button,
+  HStack,
+  VStack,
+  Image,
+  Flex,
+  Text,
+  FormControl,
+  Input,
+  Square,
+  Link,
+} from "@chakra-ui/react";
+
 
 const Home = () => {
   return (
@@ -31,7 +33,14 @@ const Home = () => {
           Selamat datang di perpustakaan resep makanan Krusty Krab <br />
           Lebih dari 9 miliar resep masakan dapat ditemukan disini! <br />
           <br />
-          <Button colorScheme={"orange"}>Register</Button>
+          {/* <Link replace to="/register"> */}
+          <Button
+            colorScheme={"orange"}
+            onclick="location.href = 'http://localhost:3000/register';"
+          >
+            Register
+          </Button>
+          {/* </Link> */}
         </Box>
         <HStack paddingTop={"10%"} spacing={100} backgroundColor={"white"}>
           <Box
@@ -44,7 +53,9 @@ const Home = () => {
             See our collection of secret recipe
           </Box>
           <Box>
+            <Link to="/book">
             <Button colorScheme="orange">Book Collection</Button>
+            </Link>
           </Box>
         </HStack>
         {/* <HStack> */}
@@ -67,19 +78,21 @@ const Home = () => {
           paddingX={"50px"}
           fontSize="20px"
         >
-          <Box w="30%">
-            <Image
-              src="https://cdn.istyle.im/images/product/web/89/11/92/00/0/000000921189_01_800.jpg"
-              alt="The Hunger Games"
-              height={"200px"}
-            />
-            <Text fontWeight={"bold"}>The Hunger Games</Text>
-            <Text>
-              Katniss Everdeen must fight for her life in a televised survival
-              competition. Learn these words from the first book of Suzanne
-              Collins's dystopian trilogy.
-            </Text>
-          </Box>
+          <Link to="/detail/">
+            <Box w="30%">
+              <Image
+                src="https://cdn.istyle.im/images/product/web/89/11/92/00/0/000000921189_01_800.jpg"
+                alt="The Hunger Games"
+                height={"200px"}
+              />
+              <Text fontWeight={"bold"}>The Hunger Games</Text>
+              <Text>
+                Katniss Everdeen must fight for her life in a televised survival
+                competition. Learn these words from the first book of Suzanne
+                Collins's dystopian trilogy.
+              </Text>
+            </Box>
+          </Link>
           <Box w="30%">
             <Image
               src="https://cdn.gramedia.com/uploads/items/bumi-manusia-edit.jpg"
