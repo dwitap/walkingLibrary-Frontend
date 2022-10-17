@@ -1,5 +1,4 @@
 import {
-    Box,
     Button,
     Input,
     FormControl,
@@ -22,17 +21,14 @@ import { useEffect, useState } from "react"
 import { axiosInstance } from "../api"
 import BookCollection from "../components/bookCollection"
 import { CgChevronLeft, CgChevronRight } from "react-icons/cg"
-import bookSlice from "../redux/features/bookSlice"
 
 const Book = () => {
     const [book, setBook] = useState([])
     const [page, setPage] = useState(1)
-    // const [limit, setLimit] = useState(10)
-    const [pages, setPages] = useState()
+    const [pages, setPages] = useState(0)
     const [rows, setRows] = useState(0)
     const [keyword, setKeyword] = useState("")
     const [keywordHandler, setKeywordHandler] = useState("")
-    const [sortDir, setSortDir] = useState("ASC")
     const maxItemsPage = 10
     const [maxPage, setMaxPage] = useState(0)
 
@@ -43,10 +39,9 @@ const Book = () => {
                     _keywordHandler: keyword,
                     _page: pages,
                     _limit: maxItemsPage,
-                    _sortDir: sortDir,
+                    _order: "ASC",
                 },
             })
-            // setBook(collection.data.data)
             setRows(collection.data.totalRows)
             setMaxPage(Math.ceil(collection.data.totalRows) / maxItemsPage)
 
@@ -84,7 +79,6 @@ const Book = () => {
             )
         })
     }
-    console.log(renderBooks())
 
     const searchKey = (event) => {
         event.preventDevault()
@@ -93,9 +87,8 @@ const Book = () => {
     }
 
     useEffect(() => {
-        console.log(page)
         fetchBooks()
-    }, [pages, keyword, sortDir])
+    }, [pages, keyword])
 
     return (
         <div

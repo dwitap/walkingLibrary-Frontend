@@ -1,15 +1,5 @@
-import {
-    Image,
-    Box,
-    Spacer,
-    Flex,
-    InputRightElement,
-    InputGroup,
-    Button,
-    Input,
-    Text,
-    Center,
-} from "@chakra-ui/react"
+
+import { Image, Box, Spacer, Flex, Button, Text } from "@chakra-ui/react"
 import { Link, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import LoginPage from "./pages/LoginPage"
