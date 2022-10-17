@@ -35,7 +35,6 @@ const BookCollection = ({
         }
     }
 
-
     useEffect(() => {
         fetchBooks()
     }, [])
@@ -44,10 +43,12 @@ const BookCollection = ({
         <>
             <Tr>
                 <Td>
-                    <Image maxH={"120px"} src={image_url || ""} />
+                    <Link to={`/detail/${id}`}>
+                        <Image maxH={"120px"} src={image_url || ""} />
+                    </Link>
                 </Td>
                 <Td>
-                    <Link to={`/detail`}>{title}</Link>
+                    <Link to={`/detail/${id}`}>{title}</Link>
                 </Td>
                 <Td>{author}</Td>
                 <Td>{release_year}</Td>
