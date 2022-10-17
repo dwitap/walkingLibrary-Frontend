@@ -1,16 +1,14 @@
 import {
   Tr,
   Td,
-  useDisclosure,
   Image,
   Button,
   useToast,
 } from "@chakra-ui/react"
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 import { axiosInstance } from "../api"
 import { useState } from "react"
 import { useEffect } from "react"
-import DetailPage from "../pages/DetailBook"
 import { Link } from "react-router-dom"
 
 const BookCollection = ({
@@ -22,9 +20,7 @@ const BookCollection = ({
   genre,
   language,
 }) => {
-  const authSelector = useSelector((state) => state.auth)
-
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  // const authSelector = useSelector((state) => state.auth)
 
   // const confirmDeleteBtnHandler = () => {
   //   onClose()

@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux"
 import * as Yup from "yup"
 import { axiosInstance } from "../api"
 import { login } from "../redux/features/authSlice"
+import { Link } from "react-router-dom"
 
 const LoginPage = () => {
     const toast = useToast()
@@ -112,6 +113,9 @@ const LoginPage = () => {
                             <Button type="submit" colorScheme="whiteAlpha">
                                 Login
                             </Button>
+                            <Link to="/">
+                            <Button width={"100%"} colorScheme="whiteAlpha">Go to Homepage</Button>
+                            </Link>
                         </Stack>
                     </form>
                 </Box>
