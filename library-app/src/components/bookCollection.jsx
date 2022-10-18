@@ -5,7 +5,7 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react"
-// import { useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { axiosInstance } from "../api"
 import { useState } from "react"
 import { useEffect } from "react"
@@ -20,7 +20,7 @@ const BookCollection = ({
   genre,
   language,
 }) => {
-  // const authSelector = useSelector((state) => state.auth)
+  const authSelector = useSelector((state) => state.auth)
 
   // const confirmDeleteBtnHandler = () => {
   //   onClose()
@@ -42,7 +42,12 @@ const BookCollection = ({
   }
 
   const pushToCart = async () => {
-    try {
+    if (!authSelector.id) {
+      toast({ title: "Need to login", status: "error" })
+      return
+    }
+
+    try { 
       // if()
       let bookToAdd = {
         BookId: id,
@@ -52,7 +57,7 @@ const BookCollection = ({
       toast({ title: "Book Added", status: "success" })
     } catch (err) {
       console.log(err)
-      toast({ title: "Please login first", status: "error" })
+      toast({ title: "Already have this book on cart", status: "error" })
     }
   } 
 

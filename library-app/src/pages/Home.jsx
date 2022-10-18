@@ -77,13 +77,14 @@ const Home = () => {
           fontSize="20px"
         >
           <Link to="/detail/11">
-            <Box>
+            <Box display={"flex"} flexDirection={'column'}>
               <Image
                 src="https://cdn.istyle.im/images/product/web/89/11/92/00/0/000000921189_01_800.jpg"
                 alt="The Hunger Games"
                 height={"200px"}
+                alignSelf={"center"}
               />
-              <Text fontWeight={"bold"}>The Hunger Games</Text>
+              <Text fontWeight={"bold"} textAlign="center" pt={"20px"}>The Hunger Games</Text>
               <Text>
                 Katniss Everdeen must fight for her life in a televised survival
                 competition. Learn these words from the first book of Suzanne
@@ -92,13 +93,14 @@ const Home = () => {
             </Box>
           </Link>
           <Link to="/detail/40">
-          <Box>
+          <Box display={"flex"} flexDirection={'column'}>
             <Image
               src="https://cdn.gramedia.com/uploads/items/bumi-manusia-edit.jpg"
               alt="Bumi Manusia"
               height={"200px"}
+              alignSelf={"center"}
             />
-            <Text fontWeight={"bold"}>Bumi Manusia</Text>
+            <Text fontWeight={"bold"} textAlign="center" pt={"20px"}>Bumi Manusia</Text>
             <Text>
               Tak ada hamparan bunga mawar. Tak ada pelayaran yang menyenangkan.
               Kuanggap semuanya sebagai tantangan di hadapan seluruh umat
@@ -107,13 +109,14 @@ const Home = () => {
           </Box>
           </Link>
           <Link to="/detail/34">
-          <Box>
+          <Box display={"flex"} flexDirection={'column'}>
             <Image
               src="https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1597998203l/52465880.jpg"
               alt="How To Respect Myself"
               height={"200px"}
+              alignSelf={"center"}
             />
-            <Text fontWeight={"bold"}>How To Respect Myself</Text>
+            <Text fontWeight={"bold"} textAlign="center" pt={"20px"}>How To Respect Myself</Text>
             <Text>
               Dalam hidup ini, kita punya beberapa masalah. Tapi saat kau
               mengkhawatirkannya, kau justru menggandakan masalah tersebut.{" "}
