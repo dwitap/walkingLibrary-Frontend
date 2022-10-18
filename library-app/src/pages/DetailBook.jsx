@@ -7,16 +7,20 @@ import {
     Button,
     Grid,
     GridItem,
+    useToast,
+
 } from "@chakra-ui/react"
 import { useState, useEffect } from "react"
-import { detailsBook } from "../redux/features/bookSlice"
 import { useParams } from "react-router-dom"
 import { axiosInstance } from "../api"
+import { useSelector } from "react-redux"
+
 
 const DetailPage = () => {
-    const [dataBook, setDataBook] = useState({})
-    const [test, setTest] = useState({})
+    const authSelector = useSelector((state) => state.auth)
 
+    const [dataBook, setDataBook] = useState({})
+    const toast = useToast()
     const params = useParams()
 
     const fetchBook = async () => {
@@ -28,6 +32,29 @@ const DetailPage = () => {
             console.log(err)
         }
     }
+
+    const pushToCart = async () => {
+        if (!authSelector.id) {
+          toast({ title: "Need to login", status: "error" })
+          return
+        }
+    
+        try { 
+          let bookToAdd = {
+            BookId: authSelector.id,
+          }
+          await axiosInstance.post("/cart", bookToAdd)
+    
+          toast({ title: "Book Added", status: "success" })
+        } catch (err) {
+          console.log(err)
+          toast({ title: "Already have this book on cart", status: "error" })
+        }
+      } 
+      
+    const addToCartBtn = () => {
+        pushToCart()
+      }
 
     useEffect(() => {
         fetchBook()
@@ -45,7 +72,7 @@ const DetailPage = () => {
                     justifyContent={"flex-end"}
                     pt={"5"}
                 >
-                    <Button>Add to Cart</Button>
+                    <Button onClick={addToCartBtn}>Add to Cart</Button>
                 </GridItem>
             </Grid>
             <Flex

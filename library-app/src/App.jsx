@@ -7,6 +7,7 @@ import RegisterPage from "./pages/RegisterPage"
 import Book from "./pages/Book"
 import MyCart from "./pages/MyCart"
 import DetailPage from "./pages/DetailBook"
+import DetailPageAdmin from "./pages/DetailBookAdmin"
 import BorrowedBook from "./pages/BorrowedBook"
 import { login, logout } from "./redux/features/authSlice"
 import { useDispatch, useSelector } from "react-redux"
@@ -172,6 +173,7 @@ const App = () => {
                 <Route path="/mycart" element={<MyCart />} />
                 <Route path="/detail/:bookId" element={<DetailPage />} />
                 <Route path="/borrowed" element={<BorrowedBook />} />
+                <Route path="/admin/detail/:bookId" element={<DetailPageAdmin />} />
             </Routes>
         </>
         //   {/* navbar */}
