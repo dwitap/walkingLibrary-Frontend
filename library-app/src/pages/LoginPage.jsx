@@ -121,8 +121,6 @@ const LoginPage = () => {
                 </Box>
             </Container>
         </Box>
-      </Container>
-    </Box>
   );
 };
 

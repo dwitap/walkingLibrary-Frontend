@@ -8,67 +8,29 @@ import {
   Table,
   Button,
   useToast,
-} from "@chakra-ui/react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+} from "@chakra-ui/react"
+import { useState } from "react"
+import { useEffect } from "react"
+import { Link } from "react-router-dom"
 
-  import { axiosInstance } from "../api";
-  import BorrowedBookComp from "../components/borrowedBookComp"
-  
-  const BorrowedBook = () => {
-    const [book, setBook] = useState([]);
-    const toast = useToast()
-    
-    const fetchBooks = async () => {
-      try {
-        const collection = await axiosInstance.get("/cart/borrowed");
-        setBook(collection.data.data);
-        // console.log(collection.data.data);
-        // setBook(collection.data.data[i].Book);
-        // console.log(collection.data.data[i].Book)
-      } catch (err) {
-        console.log(err);
-      }
-    };
-  
-  
-    const renderBooks = () => {
-      return book.map((val) => {
-        return (
-          <BorrowedBookComp
-            key={val.id.toString()}
-            id={val.Book.id}
-            image_url={val.Book.image_url}
-            title={val.Book.title}
-            author={val.Book.author}
-            release_year={val.Book.release_year}
-            genre={val.Book.genre}
-            language={val.Book.language}
-          />
-        );
-      });
-    };
-    
-    const confirmReturnHandler = async (id) => {
-      try {
-        await axiosInstance.delete("/cart");
-        
+import { axiosInstance } from "../api"
+import BorrowedBookComp from "../components/borrowedBookComp"
+
 const BorrowedBook = () => {
-  const [book, setBook] = useState([]);
-  const toast = useToast();
+  const [book, setBook] = useState([])
+  const toast = useToast()
 
   const fetchBooks = async () => {
     try {
-      const collection = await axiosInstance.get("/cart/borrowed");
-      setBook(collection.data.data);
-      console.log(collection.data.data);
+      const collection = await axiosInstance.get("/cart/borrowed")
+      setBook(collection.data.data)
+      // console.log(collection.data.data);
       // setBook(collection.data.data[i].Book);
       // console.log(collection.data.data[i].Book)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   const renderBooks = () => {
     return book.map((val) => {
@@ -83,24 +45,24 @@ const BorrowedBook = () => {
           genre={val.Book.genre}
           language={val.Book.language}
         />
-      );
-    });
-  };
+      )
+    })
+  }
 
   const confirmReturnHandler = async (id) => {
     try {
-      await axiosInstance.delete("/cart");
+      await axiosInstance.delete("/cart")
 
-      fetchBooks();
-      toast({ title: "Books has been returned. Thank you", status: "success" });
+      fetchBooks()
+      toast({ title: "Books has been returned. Thank you", status: "success" })
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   useEffect(() => {
-    fetchBooks();
-  }, []);
+    fetchBooks()
+  }, [])
 
   return (
     <Box>
@@ -149,6 +111,7 @@ const BorrowedBook = () => {
         </Link>
       </Container>
     </Box>
-  );
-};
-export default BorrowedBook;
+  )
+}
+
+export default BorrowedBook
