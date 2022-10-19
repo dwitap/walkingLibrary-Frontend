@@ -22,7 +22,7 @@ import * as Yup from "yup"
 import { useFormik } from "formik";
 import { detailsBook } from "../redux/features/bookSlice"
 
-const DetailPage = () => {
+const DetailBookAdmin = () => {
   const authSelector = useSelector((state) => state.auth);
   const [dataBook, setDataBook] = useState({});
   const toast = useToast();
@@ -300,4 +300,4 @@ const DetailPage = () => {
   );
 };
 
-export default DetailPage;
+export default DetailBookAdmin;
