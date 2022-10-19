@@ -1,9 +1,4 @@
-import {
-  Button,
-  Image,
-  Td,
-  Tr,
-} from "@chakra-ui/react";
+import { Button, Image, Td, Tr } from "@chakra-ui/react";
 
 const BookCart = ({
   title,
@@ -14,8 +9,6 @@ const BookCart = ({
   onDelete,
   image_url,
 }) => {
-
-
   const confirmDeleteBtnHandler = () => {
     onDelete();
   };
@@ -23,17 +16,16 @@ const BookCart = ({
   return (
     <>
       <Tr>
-      <Td><Image src={image_url} alt="Image URL"/></Td>
+        <Td>
+          <Image src={image_url} alt="Image URL" />
+        </Td>
         <Td>{title}</Td>
         <Td>{author}</Td>
         <Td>{release_year}</Td>
         <Td>{genre}</Td>
         <Td>{language}</Td>
         <Td>
-          <Button 
-          colorScheme="red" 
-          onClick={confirmDeleteBtnHandler} 
-          ml={3}>
+          <Button colorScheme="red" onClick={confirmDeleteBtnHandler} ml={3}>
             Delete
           </Button>
         </Td>

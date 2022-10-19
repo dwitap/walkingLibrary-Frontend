@@ -1,4 +1,5 @@
 import {
+
     Box,
     Image,
     Flex,
@@ -23,15 +24,16 @@ const DetailPage = () => {
     const toast = useToast()
     const params = useParams()
 
-    const fetchBook = async () => {
-        try {
-            const response = await axiosInstance.get(`/book/${params.bookId}`)
+  const fetchBook = async () => {
+    try {
+      const response = await axiosInstance.get(`/book/${params.bookId}`);
 
-            setDataBook(response.data.data)
-        } catch (err) {
-            console.log(err)
-        }
+      setDataBook(response.data.data);
+    } catch (err) {
+      console.log(err);
     }
+  };
+
 
     const pushToCart = async () => {
         if (!authSelector.id) {
@@ -121,7 +123,42 @@ const DetailPage = () => {
                 </Box>
             </Flex>
         </Box>
-    )
-}
+        <Box
+          flex={"1"}
+          w={"full"}
+          h={"full"}
+          p={5}
+          m={10}
+          alignItems={"flex-start"}
+          color={"white"}
+        >
+          <Heading size={"lg"}>Title</Heading>
+          <Text fontSize={"2xl"}>{dataBook.title}</Text>
+          <br />
+          <Heading size={"lg"}>Author</Heading>
+          <Text fontSize={"2xl"}>{dataBook.author}</Text>
+          <br />
+          <Heading size={"lg"}>Release year</Heading>
+          <Text fontSize={"2xl"}>{dataBook.release_year}</Text>
+          <br />
+          <Heading size={"lg"}>ISBN</Heading>
+          <Text fontSize={"2xl"}>{dataBook.ISBN}</Text>
+          <br />
+          <Heading size={"lg"}>Publisher</Heading>
+          <Text fontSize={"2xl"}>{dataBook.publisher}</Text>
+          <br />
+          <Heading size={"lg"}>Genre</Heading>
+          <Text fontSize={"2xl"}>{dataBook.genre}</Text>
+          <br />
+          <Heading size={"lg"}>Pages</Heading>
+          <Text fontSize={"2xl"}>{dataBook.pages}</Text>
+          <br />
+          <Heading size={"lg"}>Language</Heading>
+          <Text fontSize={"2xl"}>{dataBook.language}</Text>
+        </Box>
+      </Flex>
+    </Box>
+  );
+};
 
-export default DetailPage
+export default DetailPage;

@@ -63,10 +63,9 @@ const MyCart = () => {
 
   const confirmBorrowHandler = async (id) => {
     try {
-      await axiosInstance.patch("/cart");      
+      await axiosInstance.patch("/cart");
       fetchBooks();
-      toast({ title: "Successfully borrowed the books", 
-      status: "info" });
+      toast({ title: "Successfully borrowed the books", status: "info" });
     } catch (err) {
       console.log(err);
     }
@@ -100,7 +99,7 @@ const MyCart = () => {
             textAlign={"center"}
           >
             <Tr>
-            <Th>Image</Th>
+              <Th>Image</Th>
               <Th>Title</Th>
               <Th>Author</Th>
               <Th>Release year</Th>
@@ -112,15 +111,15 @@ const MyCart = () => {
           </Table>
         </HStack>
         <Link to="/borrowed">
-        <Button
-          colorScheme={"green"}
-          alignItems="center"
-          justifyContent="center"
-          width={"100%"}
-          onClick={confirmBorrowHandler}
-        >
-          Borrow books
-        </Button>
+          <Button
+            colorScheme={"green"}
+            alignItems="center"
+            justifyContent="center"
+            width={"100%"}
+            onClick={confirmBorrowHandler}
+          >
+            Borrow books
+          </Button>
         </Link>
       </Container>
     </Box>

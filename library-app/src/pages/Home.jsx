@@ -10,36 +10,43 @@ import {
   Input,
   Square,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
     <Box width={"100%"} overflow={"hidden"}>
-      <VStack rowGap={"10%"}>
+      <Box
+        position="relative"
+        h={"70vh"}
+        display="flex"
+        alignItems="center"
+        justifyContent={"center"}
+      >
         <Image
+          zIndex={-1}
+          position="absolute"
           borderRadius="lg"
           width={"100%"}
-          height={"500px"}
+          maxH={"70vh"}
           src="https://blog.eigeradventure.com/wp-content/uploads/2022/05/perpustakaan-terbaik-di-indonesia-3.jpg"
           alt="Krusty Krab Library"
         />
         <Box
+          zIndex={99}
           fontSize={"2xl"}
           fontWeight={"bold"}
           textAlign={"center"}
-          paddingTop={"-100px"}
+          color="white"
         >
           Selamat datang di perpustakaan resep makanan Krusty Krab <br />
           Lebih dari 9 miliar resep masakan dapat ditemukan disini! <br />
           <br />
           <Link to="/register">
-          <Button
-            colorScheme={"orange"}
-          >
-            Register
-          </Button>
+            <Button colorScheme={"orange"}>Register</Button>
           </Link>
         </Box>
+      </Box>
+      <VStack rowGap={"10%"}>
         <HStack paddingTop={"10%"} spacing={100} backgroundColor={"white"}>
           <Box
             fontSize={"4xl"}
@@ -52,7 +59,7 @@ const Home = () => {
           </Box>
           <Box>
             <Link to="/book">
-            <Button colorScheme="orange">Book Collection</Button>
+              <Button colorScheme="orange">Book Collection</Button>
             </Link>
           </Box>
         </HStack>
@@ -93,6 +100,7 @@ const Home = () => {
             </Box>
           </Link>
           <Link to="/detail/40">
+
           <Box display={"flex"} flexDirection={'column'}>
             <Image
               src="https://cdn.gramedia.com/uploads/items/bumi-manusia-edit.jpg"
@@ -126,124 +134,6 @@ const Home = () => {
         </Flex>
         {/* </HStack> */}
       </VStack>
-
-      {/* Footer */}
-      <Box bg="#9E7676">
-        <VStack>
-          <Flex color="black">
-            <Box bg="" width="760px" h="380px">
-              <Text
-                textAlign="center"
-                fontSize="3xl"
-                color="white"
-                paddingTop={"30px"}
-                paddingLeft="150px"
-              >
-                Ada masukan untuk kami?
-              </Text>
-              <FormControl textAlign={"center"} paddingLeft="150px">
-                <Input
-                  placeholder="Name"
-                  width="340px"
-                  marginTop="20px"
-                  bg="white"
-                />
-              </FormControl>
-
-              <FormControl textAlign={"center"} paddingLeft="150px">
-                <Input
-                  placeholder="Email"
-                  width="340px"
-                  marginTop="10px"
-                  bg="white"
-                />
-              </FormControl>
-              <FormControl textAlign={"center"} paddingLeft="150px">
-                <Input
-                  placeholder="Feedback"
-                  width="340px"
-                  bg="white"
-                  marginTop="10px"
-                  height="100px"
-                />
-              </FormControl>
-
-              <Button
-                bg="orange"
-                marginTop="10px"
-                marginLeft="475px"
-                width="150px"
-                _hover={""}
-              >
-                Send
-              </Button>
-            </Box>
-            <Box flex="1" bg="" width="760px" h="300px" paddingTop="30px">
-              <Text
-                textAlign="center"
-                fontSize="3xl"
-                color="white"
-                paddingRight={"200px"}
-              >
-                Hubungi kami
-              </Text>
-              <Square justifyContent={"center"}>
-                <Image
-                  src="https://i.ibb.co/fXPc0Mx/Krusty-Krab-free-file-1.png"
-                  alt="Krusty Krab"
-                  border="0"
-                  height="100px"
-                  paddingRight={"100px"}
-                  marginTop="18px"
-                />
-              </Square>
-              <Square
-                justifyContent={"center"}
-                marginLeft="40px"
-                marginTop={"12px"}
-                paddingRight="180px"
-              >
-                <Text
-                  marginTop={"10px"}
-                  color="white"
-                  fontFamily={"sans-serif"}
-                >
-                  Perpustakaan Resep Bikini Bottom
-                </Text>
-              </Square>
-              <Square
-                justifyContent={"center"}
-                marginLeft="40px"
-                paddingLeft={"67px"}
-              >
-                <Text
-                  marginTop={"10px"}
-                  color="white"
-                  fontFamily={"sans-serif"}
-                >
-                  Jl. Raya Bikini Bottom No. 2, Kec. Simpang kerang, Samudera
-                  Pasific
-                </Text>
-              </Square>
-              <Square
-                justifyContent={"center"}
-                marginLeft="40px"
-                paddingRight={"193px"}
-              >
-                <Text
-                  marginTop={"10px"}
-                  fontSize
-                  color="white"
-                  fontFamily={"sans-serif"}
-                >
-                  Email: KrustyKrab69@gmail.com{" "}
-                </Text>
-              </Square>
-            </Box>
-          </Flex>
-        </VStack>
-      </Box>
-      {/* Footer */}
     </Box>
   );
 };

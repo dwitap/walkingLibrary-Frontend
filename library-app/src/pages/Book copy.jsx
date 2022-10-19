@@ -8,21 +8,20 @@ import {
   Input,
   FormControl,
   Text,
-} from "@chakra-ui/react"
-import { useEffect, useState } from "react"
-import ReactPaginate from "react-paginate"
-import { axiosInstance } from "../api"
-import BookCollection from "../components/bookCollection"
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
+import { axiosInstance } from "../api";
+import BookCollection from "../components/bookCollection";
 
 const Book = () => {
-
-    const [book, setBook] = useState([])
-    const [page, setPage] = useState(0)
-    const [limit, setLimit] = useState(10)
-    const [pages, setPages] = useState(0)
-    const [rows, setRows] = useState(0)
-    const [keyword, setKeyword] = useState("")
-    const [keywordHandler, setKeywordHandler] = useState("")
+  const [book, setBook] = useState([]);
+  const [page, setPage] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [pages, setPages] = useState(0);
+  const [rows, setRows] = useState(0);
+  const [keyword, setKeyword] = useState("");
+  const [keywordHandler, setKeywordHandler] = useState("");
 
   const fetchBooks = async () => {
     try {
@@ -33,17 +32,14 @@ const Book = () => {
           _page: page,
           _limit: limit,
         },
-      })
-      setBook(collection.data.data)
-      setPages(collection.data.totalPage)
-      setRows(collection.data.totalRows)
-
+      });
+      setBook(collection.data.data);
+      setPages(collection.data.totalPage);
+      setRows(collection.data.totalRows);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
-
-
+  };
 
   const renderBooks = () => {
     return book.map((val) => {
@@ -52,31 +48,29 @@ const Book = () => {
           key={val.id.toString()}
           title={val.title}
           author={val.author}
-          release_year={val.release_year} 
+          release_year={val.release_year}
           genre={val.genre}
           language={val.language}
         />
-      )
-    })
-  }
-
+      );
+    });
+  };
 
   const searchKey = (event) => {
-    event.preventDevault()
-    setPage(0)
-    setKeyword(keywordHandler)
-  }
+    event.preventDevault();
+    setPage(0);
+    setKeyword(keywordHandler);
+  };
 
   const changePage = ({ selected }) => {
-    setPage(selected)
-console.log(selected)  
-}
-  
+    setPage(selected);
+    console.log(selected);
+  };
 
   useEffect(() => {
-    console.log(page)
-    fetchBooks()
-  }, [page, keyword])
+    console.log(page);
+    fetchBooks();
+  }, [page, keyword]);
 
   return (
     <>
@@ -88,9 +82,7 @@ console.log(selected)
         />
         <Button onSubmit={searchKey}>Search</Button>
       </FormControl>
-
-//   title, author, release_year, genre, language
-
+      // title, author, release_year, genre, language
       <Box fontWeight={"bold"}>Books</Box>
       <HStack>
         <Box>title</Box>
@@ -100,7 +92,6 @@ console.log(selected)
         <Box>language</Box>
       </HStack>
       {renderBooks()}
-
       <Text>
         Total Rows: {rows} Page: {rows ? page + 1 : 0} of {pages}
       </Text>
@@ -113,7 +104,7 @@ console.log(selected)
         />
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default Book
+export default Book;
