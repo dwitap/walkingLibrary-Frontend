@@ -41,6 +41,7 @@ const LoginPage = () => {
                         username: response.data.data.username,
                         email: response.data.data.email,
                         id: response.data.data.id,
+                        role: response.data.data.role
                     })
                 )
 

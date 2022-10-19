@@ -21,6 +21,8 @@ import { useEffect, useState } from "react"
 import { axiosInstance } from "../api"
 import BookCollection from "../components/bookCollection"
 import { CgChevronLeft, CgChevronRight } from "react-icons/cg"
+import AdminBook from "../components/adminBook"
+
 
 const BookAdmin = () => {
     const [book, setBook] = useState([])
@@ -66,7 +68,8 @@ const BookAdmin = () => {
     const renderBooks = () => {
         return book.map((val) => {
             return (
-                <BookCollection
+
+                <AdminBook
                     key={val.id.toString()}
                     id={val.id}
                     image_url={val.image_url}
@@ -80,7 +83,9 @@ const BookAdmin = () => {
         })
     }
 
-    const deleteBook = () => {}
+    const deleteBook = () => {
+        
+    }
 
     const addBook = () => {}
 

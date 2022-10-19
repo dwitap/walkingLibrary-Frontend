@@ -1,4 +1,3 @@
-
 import {
   Image,
   Box,
@@ -20,6 +19,7 @@ import Book from "./pages/Book";
 import MyCart from "./pages/MyCart";
 import DetailPage from "./pages/DetailBook";
 import BorrowedBook from "./pages/BorrowedBook";
+import BookAdmin from "./pages/BookAdmin"
 import { login, logout } from "./redux/features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -52,6 +52,17 @@ const App = () => {
       setAuthCheck(true);
     }
   };
+  
+  const renderAdminRoutes = () => {
+    if (authSelector.role === "admin") {
+      return (
+        <>
+          <Route path="/book_admin" element={<BookAdmin />} />
+        </>
+      )
+    }
+    return null
+  }
 
   const logoutBtnHandler = () => {
     localStorage.removeItem("auth_token");
@@ -381,6 +392,8 @@ const App = () => {
                 <Route path="/detail/:bookId" element={<DetailPage />} />
                 <Route path="/borrowed" element={<BorrowedBook />} />
                 <Route path="/admin/detail/:bookId" element={<DetailPageAdmin />} />
+                {/* <Route path="/book_admin" element={<BookAdmin />} /> */}
+                {renderAdminRoutes()}
             </Routes>
         </>
         //   {/* navbar */}
