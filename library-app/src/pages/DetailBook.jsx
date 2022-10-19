@@ -58,6 +58,29 @@ const DetailPage = () => {
         pushToCart()
       }
 
+    const pushToCart = async () => {
+        if (!authSelector.id) {
+          toast({ title: "Need to login", status: "error" })
+          return
+        }
+    
+        try { 
+          let bookToAdd = {
+            BookId: authSelector.id,
+          }
+          await axiosInstance.post("/cart", bookToAdd)
+    
+          toast({ title: "Book Added", status: "success" })
+        } catch (err) {
+          console.log(err)
+          toast({ title: "Already have this book on cart", status: "error" })
+        }
+      } 
+      
+    const addToCartBtn = () => {
+        pushToCart()
+      }
+
     useEffect(() => {
         fetchBook()
     }, [])
