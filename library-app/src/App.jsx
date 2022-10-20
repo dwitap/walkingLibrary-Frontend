@@ -58,7 +58,8 @@ const App = () => {
     if (authSelector.role === "admin") {
       return (
         <>
-          <Route path="/book_admin" element={<BookAdmin />} />
+          <Route path="/admin/detail/:bookId" element={<DetailBookAdmin />} />
+          <Route path="/admin/book" element={<BookAdmin />} />
         </>
       )
     }
@@ -239,7 +240,6 @@ const App = () => {
         <Route path="/mycart" element={<MyCart />} />
         <Route path="/detail/:bookId" element={<DetailPage />} />
         <Route path="/borrowed" element={<BorrowedBook />} />
-        <Route path="/admin/detail/:bookId" element={<DetailBookAdmin />} />
         <Route path="/profil" element={<Profil />} />
         {/* <Route path="/book_admin" element={<BookAdmin />} /> */}
         {renderAdminRoutes()}
