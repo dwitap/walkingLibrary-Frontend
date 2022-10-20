@@ -28,6 +28,8 @@ import { useEffect } from "react"
 import { axiosInstance } from "./api"
 import Profil from "./pages/Profil"
 import { useFormik } from "formik"
+import AddBook from "./pages/BookAddByAdmin"
+import AdminDashboard from "./pages/AdminDashboard"
 
 const App = () => {
   const [authCheck, setAuthCheck] = useState(false)
@@ -242,6 +244,8 @@ const App = () => {
         <Route path="/admin/detail/:bookId" element={<DetailBookAdmin />} />
         <Route path="/profil" element={<Profil />} />
         {/* <Route path="/book_admin" element={<BookAdmin />} /> */}
+        <Route path="/addbook" element={<AddBook />} />
+        <Route path="/admin" element={<AdminDashboard />} />
         {renderAdminRoutes()}
       </Routes>
 
@@ -320,12 +324,11 @@ const App = () => {
                 </Button>
               </form>
             </Box>
-            <Box flex="1" bg="" width="760px" h="300px" paddingTop="30px">
+            <Box flex="1" width="20%" h="300px" paddingTop="30px">
               <Text
                 textAlign="center"
                 fontSize="3xl"
                 color="white"
-                paddingRight={"200px"}
               >
                 Hubungi kami
               </Text>
@@ -340,10 +343,8 @@ const App = () => {
                 />
               </Square>
               <Square
-                justifyContent={"center"}
-                marginLeft="40px"
+                justifyContent={"left"}
                 marginTop={"12px"}
-                paddingRight="180px"
               >
                 <Text
                   marginTop={"10px"}
@@ -354,9 +355,7 @@ const App = () => {
                 </Text>
               </Square>
               <Square
-                justifyContent={"center"}
-                marginLeft="40px"
-                paddingLeft={"67px"}
+                justifyContent={"left"}
               >
                 <Text
                   marginTop={"10px"}
@@ -368,9 +367,7 @@ const App = () => {
                 </Text>
               </Square>
               <Square
-                justifyContent={"center"}
-                marginLeft="40px"
-                paddingRight={"193px"}
+                justifyContent={"left"}
               >
                 <Text
                   marginTop={"10px"}

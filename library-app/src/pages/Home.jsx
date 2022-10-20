@@ -28,7 +28,7 @@ const Home = () => {
           borderRadius="lg"
           width={"100%"}
           maxH={"70vh"}
-          src="https://blog.eigeradventure.com/wp-content/uploads/2022/05/perpustakaan-terbaik-di-indonesia-3.jpg"
+          src="https://media.discordapp.net/attachments/1029663820039331843/1032541322638262282/Hero_Bg_1.jpg"
           alt="Krusty Krab Library"
         />
         <Box
@@ -37,6 +37,7 @@ const Home = () => {
           fontWeight={"bold"}
           textAlign={"center"}
           color="white"
+          paddingTop={"200px"}
         >
           Selamat datang di perpustakaan resep makanan Krusty Krab <br />
           Lebih dari 9 miliar resep masakan dapat ditemukan disini! <br />
