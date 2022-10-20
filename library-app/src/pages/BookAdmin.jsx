@@ -16,6 +16,11 @@ import {
     AlertIcon,
     AlertTitle,
     HStack,
+    Menu,
+    MenuList,
+    MenuOptionGroup,
+    MenuItemOption,
+    MenuButton,
 } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { axiosInstance } from "../api"
@@ -33,6 +38,7 @@ const BookAdmin = () => {
     const [keywordHandler, setKeywordHandler] = useState("")
     const maxItemsPage = 10
     const [maxPage, setMaxPage] = useState(0)
+    const [order, setOrder] = useState("")
 
     const fetchBooks = async () => {
         try {
@@ -41,7 +47,7 @@ const BookAdmin = () => {
                     _keywordHandler: keyword,
                     _page: pages,
                     _limit: maxItemsPage,
-                    _order: "ASC",
+                    _sortDir: order,
                 },
             })
             setRows(collection.data.totalRows)
@@ -78,6 +84,7 @@ const BookAdmin = () => {
                     release_year={val.release_year}
                     genre={val.genre}
                     language={val.language}
+                    fetchBooks={fetchBooks}
                 />
             )
         })
@@ -91,7 +98,7 @@ const BookAdmin = () => {
 
     const updateBook = () => {}
 
-    const searchKey = (event) => {
+    const searchKey = () => {
         // event.preventDevault()
         setPage(0)
         setKeyword(keywordHandler)
@@ -121,6 +128,30 @@ const BookAdmin = () => {
                     </Button>
                 
             </FormControl>
+
+            <Menu>
+                <MenuButton as={Button} colorScheme='blue'>
+                    Sort Title
+                </MenuButton>
+                <MenuList minWidth='240px'>
+                    <MenuOptionGroup title='Order' type='radio' onChange={(value) => setOrder(value)}>
+                    <MenuItemOption value='ASC'>Ascending</MenuItemOption>
+                    <MenuItemOption value='DESC'>Descending</MenuItemOption>
+                    </MenuOptionGroup>
+                </MenuList>
+            </Menu>
+            <Menu>
+                <MenuButton as={Button} colorScheme='green'>
+                    Sort Genre
+                </MenuButton>
+                <MenuList minWidth='240px'>
+                    <MenuOptionGroup title='genre' type='radio' onChange={(value) => setKeyword(value)}>
+                    <MenuItemOption value='Fiction'>Fiction</MenuItemOption>
+                    <MenuItemOption value='Self-help book'>Self-help book</MenuItemOption>
+                    <MenuItemOption value='Comedy'>Comedy</MenuItemOption>
+                    </MenuOptionGroup>
+                </MenuList>
+            </Menu>
 
             <Heading fontWeight={"bold"} size={"lg"}>
                 Books

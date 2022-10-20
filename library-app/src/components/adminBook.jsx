@@ -21,6 +21,7 @@ import {
     release_year,
     genre,
     language,
+    fetchBooks
   }) => {
     const authSelector = useSelector((state) => state.auth)
   
@@ -36,19 +37,10 @@ import {
     const [book, setBook] = useState([])
   //   const [addBook, setAddBook] = useState()
   
-    const fetchBooks = async () => {
-      try {
-        const collection = await axiosInstance.get("/book")
-        setBook(collection.data.data)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-  
     const destroyBook = async () => {
       try {
         await axiosInstance.delete(`/book/${id}`)
-
+        fetchBooks()
         toast({ title: "Book removed", status: "success" })
       } catch (err) {
         console.log(err)
@@ -58,7 +50,6 @@ import {
   
     const removeBookBtn = () => {
       destroyBook()
-  
     }
   
     useEffect(() => {
