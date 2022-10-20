@@ -1,99 +1,89 @@
-import {
-  Tr,
-  Td,
-  Image,
-  Button,
-  useToast,
-} from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { axiosInstance } from "../api";
-import { useState } from "react";
-import { useEffect } from "react";
-import DetailPage from "../pages/DetailBook";
-import { Link } from "react-router-dom";
-
+import { Tr, Td, Image, Button, useToast } from "@chakra-ui/react"
+import { useSelector } from "react-redux"
+import { axiosInstance } from "../api"
+import { useState } from "react"
+import { useEffect } from "react"
+import DetailPage from "../pages/DetailBook"
+import { Link } from "react-router-dom"
 
 const BookCollection = ({
-  id,
-  image_url,
-  title,
-  author,
-  release_year,
-  genre,
-  language,
+    id,
+    image_url,
+    title,
+    author,
+    release_year,
+    genre,
+    language,
 }) => {
-  const authSelector = useSelector((state) => state.auth);
+    const authSelector = useSelector((state) => state.auth)
 
-  // const confirmDeleteBtnHandler = () => {
-  //   onClose()
-  //   onDelete()
-  // }
+    // const confirmDeleteBtnHandler = () => {
+    //   onClose()
+    //   onDelete()
+    // }
 
-  const toast = useToast();
+    const toast = useToast()
 
-  const [book, setBook] = useState([]);
-  //   const [addBook, setAddBook] = useState()
+    const [book, setBook] = useState([])
+    //   const [addBook, setAddBook] = useState()
 
-  const fetchBooks = async () => {
-    try {
-      const collection = await axiosInstance.get("/book");
-      setBook(collection.data.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const pushToCart = async () => {
-    if (!authSelector.id) {
-      toast({ title: "Need to login", status: "error" })
-      return
+    const fetchBooks = async () => {
+        try {
+            const collection = await axiosInstance.get("/book")
+            setBook(collection.data.data)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
-    try { 
-      // if()
-      let bookToAdd = {
-        BookId: id,
-      };
-      await axiosInstance.post("/cart", bookToAdd);
+    const pushToCart = async () => {
+        if (!authSelector.id) {
+            toast({ title: "Need to login", status: "error" })
+            return
+        }
 
-      toast({ title: "Book Added", status: "success" });
-    } catch (err) {
+        try {
+            let bookToAdd = {
+                BookId: id,
+            }
+            await axiosInstance.post("/cart", bookToAdd)
 
-      console.log(err)
-      toast({ title: "Already have this book on cart", status: "error" })
-
+            toast({ title: "Book Added", status: "success" })
+        } catch (err) {
+            console.log(err)
+            toast({ title: "Already have this book on cart", status: "error" })
+        }
     }
-  };
 
-  const addToCartBtn = () => {
-    pushToCart();
-  };
+    const addToCartBtn = () => {
+        pushToCart()
+    }
 
-  useEffect(() => {
-    fetchBooks();
-  }, []);
+    useEffect(() => {
+        fetchBooks()
+    }, [])
 
-  return (
-    <>
-      <Tr>
-        <Td>
-          <Link to={`/detail/${id}`}>
-            <Image maxH={"120px"} src={image_url || ""} />
-          </Link>
-        </Td>
-        <Td>
-          <Link to={`/detail/${id}`}>{title}</Link>
-        </Td>
-        <Td>{author}</Td>
-        <Td>{release_year}</Td>
-        <Td>{genre}</Td>
-        <Td>{language}</Td>
-        <Td>
-          <Button onClick={addToCartBtn}>Add</Button>
-        </Td>
-      </Tr>
-    </>
-  );
-};
+    return (
+        <>
+            <Tr>
+                <Td>
+                    <Link to={`/detail/${id}`}>
+                        <Image maxH={"120px"} src={image_url || ""} />
+                    </Link>
+                </Td>
+                <Td>
+                    <Link to={`/detail/${id}`}>{title}</Link>
+                </Td>
+                <Td>{author}</Td>
+                <Td>{release_year}</Td>
+                <Td>{genre}</Td>
+                <Td>{language}</Td>
+                <Td>
+                    <Button onClick={addToCartBtn}>Add</Button>
+                </Td>
+            </Tr>
+        </>
+    )
+}
 
-export default BookCollection;
+export default BookCollection
