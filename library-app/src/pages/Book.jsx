@@ -42,9 +42,9 @@ const Book = () => {
           _order: "ASC",
         },
       })
-      setRows(collection.data.totalRows)
-      setMaxPage(Math.ceil(collection.data.totalRows) / maxItemsPage)
-
+      setRows(collection.data.totalRows -10)
+      setMaxPage(Math.ceil((collection.data.totalRows) / maxItemsPage))
+      
       if (pages === 1) {
         setBook(collection.data.data)
       } else {
@@ -82,7 +82,7 @@ const Book = () => {
 
   const searchKey = (event) => {
     // event.preventDevault()
-    setPage(0)
+    setPages(0)
     setKeyword(keywordHandler)
   }
 
@@ -139,7 +139,7 @@ const Book = () => {
         </Table>
       </TableContainer>
       <Text>
-        Page: {pages} of {maxPage}
+        Page: {pages +1} of {maxPage}
       </Text>
       <Grid templateColumns={"repeat(3, 1fr"} mt={15}>
         <GridItem />
@@ -152,13 +152,13 @@ const Book = () => {
             </Alert>
           ) : null}
           <HStack justifyContent={"end"} gap={"2px"}>
-            {pages === 0 ? null : (
+            {(pages +1) === 1 ? null : (
               <CgChevronLeft onClick={prevPage} color={"#9E7676"}>
                 {""}
               </CgChevronLeft>
             )}
-            <Text fontSize={"md"}>{pages}</Text>
-            {pages >= maxPage ? null : (
+            <Text fontSize={"md"}>{(pages +1)}</Text>
+            {(pages +1) >= maxPage ? null : (
               <CgChevronRight onClick={nextPage} color={"#9E7676"}>
                 Next
               </CgChevronRight>

@@ -15,12 +15,11 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { axiosInstance } from "../api";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import * as Yup from "yup"
 import { useFormik } from "formik";
-import { detailsBook } from "../redux/features/bookSlice"
 
 const DetailBookAdmin = () => {
   const authSelector = useSelector((state) => state.auth);
@@ -28,7 +27,6 @@ const DetailBookAdmin = () => {
   const toast = useToast();
   const params = useParams();
   const [adminUpdate, setAdminUpdate] = useState(false)
-  const dispatch = useDispatch()
 
 
 
@@ -75,6 +73,17 @@ const DetailBookAdmin = () => {
     pushToCart();
   };
 
+  const destroyBook = async () => {
+    try {
+      await axiosInstance.delete(`/book/${authSelector.id}`)
+
+      toast({ title: "Book removed", status: "success" })
+    } catch (err) {
+      console.log(err)
+      toast({ title: "Please login first", status: "error" })
+    }
+  } 
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -88,32 +97,23 @@ const DetailBookAdmin = () => {
     },
     onSubmit: async (values) => {
       try {
-        const response = await axiosInstance.get("/users", {
-          params: {
-            title: values.title,
-            author: values.author,
-            release_year: values.release_year,
-            ISBN: values.ISBN,
-            publisher: values.publisher,
-            genre: values.genre,
-            pages: values.pages,
-            language: values.language,
-          },
-        });
 
-        let newUser = {
-            username: values.username,
-            email: values.email,
-            profile_picture: values.profile_picture,
+        let updateBook = {
+          title: values.title,
+          author: values.author,
+          release_year: values.release_year,
+          ISBN: values.ISBN,
+          publisher: values.publisher,
+          genre: values.genre,
+          pages: values.pages,
+          language: values.language,
           }
 
-          await axiosInstance.patch(`/detail/${authSelector.id}`, newUser)
+          await axiosInstance.patch(`/book/${authSelector.id}`, updateBook)
 
-
-        localStorage.setItem("auth_data", response.data[0].id);
-        dispatch(detailsBook(response.data[0]));
         setAdminUpdate(false)
         toast({ title: "Profile edited", status:"success"})
+        fetchBook()
       } catch (err) {
         console.log(err);
       }
@@ -205,9 +205,11 @@ const DetailBookAdmin = () => {
             Edit Book Detail
           </Button>
           <br />
-          <Button mt="10" mr="8"  onClick={() => setAdminUpdate(true)}>
+          <Link to="/book">
+          <Button mt="10" mr="8"  onClick={destroyBook}>
             Delete Book
-          </Button>
+            </Button>
+          </Link>
           </Box>
         </Flex>
       ) : (
